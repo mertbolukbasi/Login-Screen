@@ -4,11 +4,16 @@
 
 }
 
-.gridPane {
+.pane {
 
+    -fx-alignment: center;
     -fx-border-radius: 24px;
     -fx-background-color: white;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 15, 0.3, 0, 8);
-
-
 }
+
+.register {
+
+    -fx-background-color:linear-gradient(to right bottom, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+}
+

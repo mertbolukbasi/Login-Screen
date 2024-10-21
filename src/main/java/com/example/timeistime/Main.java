@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,22 +19,8 @@ public class Main extends Application {
         AnchorPane anchorPane = fxmlLoader.load();
 
         // Scene oluştur
-        Scene scene = new Scene(anchorPane, 800, 600);
+        Scene scene = new Scene(anchorPane, 1280, 720);
         scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("loginScreenStyle.css")).toExternalForm());
-
-        GridPane gridPane = (GridPane) anchorPane.lookup(".gridPane");
-
-        // Uygulama açıldığında kenar boşluklarını ayarla
-        setPadding(gridPane, scene.getWidth(), scene.getHeight());
-
-        // Yüzdesel kenar boşlukları ayarlamak için dinleyiciler ekleyin
-        scene.widthProperty().addListener((obs, oldVal, newVal) -> {
-            setPadding(gridPane, newVal.doubleValue(), scene.getHeight());
-        });
-
-        scene.heightProperty().addListener((obs, oldVal, newVal) -> {
-            setPadding(gridPane, scene.getWidth(), newVal.doubleValue());
-        });
 
         // Başlık ve sahneyi göster
         stage.setTitle("Hello!");
@@ -41,15 +28,7 @@ public class Main extends Application {
         stage.show();
     }
 
-    private void setPadding(GridPane gridPane, double width, double height) {
-        double padding = width * 0.1; // %10 padding for left and right
-        AnchorPane.setLeftAnchor(gridPane, padding);
-        AnchorPane.setRightAnchor(gridPane, padding);
 
-        padding = height * 0.1; // %10 padding for top and bottom
-        AnchorPane.setTopAnchor(gridPane, padding);
-        AnchorPane.setBottomAnchor(gridPane, padding);
-    }
 
     public static void main(String[] args) {
         launch();
