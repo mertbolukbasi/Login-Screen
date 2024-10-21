@@ -1,0 +1,14 @@
+.anchorPane {
+
+    -fx-background-color: linear-gradient(to top right, #0093E9, #80D0C7);
+
+}
+
+.gridPane {
+
+    -fx-border-radius: 24px;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 15, 0.3, 0, 8);
+
+
+}
