@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -21,6 +22,7 @@ public class Main extends Application {
         // Scene oluştur
         Scene scene = new Scene(anchorPane, 1280, 720);
         scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("loginScreenStyle.css")).toExternalForm());
+        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
 
         // Başlık ve sahneyi göster
         stage.setTitle("Hello!");

@@ -1,6 +1,6 @@
 module com.example.timeistime {
-    requires javafx.controls;
     requires javafx.fxml;
+    requires org.kordamp.bootstrapfx.core;
 
 
     opens com.example.timeistime to javafx.fxml;
