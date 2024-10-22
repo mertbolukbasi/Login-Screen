@@ -20,59 +20,54 @@ public class Controller {
     @FXML
     private PasswordField passwordField;
 
+    // Giriş butonuna tıklanınca çalışacak
     @FXML
     void getUserLogin(ActionEvent event) {
-
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        if(email.isEmpty() || password.isEmpty()) {
-            System.out.println("Bos");
+        // Boş alan kontrolü
+        if (email.isEmpty() || password.isEmpty()) {
+            showAlert("Empty Areas!", "Enter the e-mail and password!", Alert.AlertType.WARNING);
             return;
         }
 
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        // Veritabanı ile giriş kontrolü
+        try (Connection connection = Database.openDataBase()) {
+            assert connection != null;
+            try (PreparedStatement preparedStatement = createPreparedStatement(connection, email, password);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
 
-        try {
-            connection = Database.openDataBase();
-
-            String sql = "select * from logindata where Emails=? and Password=?";
-            if(connection != null) {
-                preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, email);
-                preparedStatement.setString(2, password);
-                resultSet = preparedStatement.executeQuery();
-
-                if(resultSet.next()) {
-                    Alert a = new Alert(Alert.AlertType.INFORMATION);
-                    a.setHeaderText("Login Successful");
-                    a.setContentText("CSS'teki mesajini gordum gotunu sikeyim");
-                    a.showAndWait();
-                    System.out.println("Basarili");
+                if (resultSet != null && resultSet.next()) {
+                    showAlert("Login Succesfull", "Welcome", Alert.AlertType.INFORMATION);
+                    System.out.println("Login Succesfull");
+                } else {
+                    showAlert("Login Unsuccesfull", "E-mail or password incorrect!", Alert.AlertType.ERROR);
+                    System.out.println("Login Unsuccesfull");
                 }
 
-                else {
-                    System.out.println("Basarisiz");
-                }
             }
-
-
         } catch (SQLException e) {
-            System.out.println("DataBase Error: " + e.getMessage());
+            showAlert("Database Error", "An error: " + e.getMessage(), Alert.AlertType.ERROR);
+            System.out.println("Database Error: " + e.getMessage());
         }
-        finally {
-            try {
-                if(resultSet != null) resultSet.close();
-                if(preparedStatement != null) preparedStatement.close();
-                if(connection != null) Database.closeDataBase();
-            }
-            catch (SQLException e) {
-                System.out.println("DataBase Error: " + e.getMessage());
-            }
-        }
+    }
 
+    // PreparedStatement oluşturan yardımcı metot
+    private PreparedStatement createPreparedStatement(Connection connection, String email, String password) throws SQLException {
+        String sql = "SELECT * FROM logindata WHERE Emails = ? AND Password = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, email);
+        preparedStatement.setString(2, password);
+        return preparedStatement;
+    }
 
+    // Genel bir alert gösterici
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
