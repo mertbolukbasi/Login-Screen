@@ -20,19 +20,19 @@ public class Controller {
     @FXML
     private PasswordField passwordField;
 
-    // Giriş butonuna tıklanınca çalışacak
+
     @FXML
     void getUserLogin(ActionEvent event) {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        // Boş alan kontrolü
+
         if (email.isEmpty() || password.isEmpty()) {
             showAlert("Empty Areas!", "Enter the e-mail and password!", Alert.AlertType.WARNING);
             return;
         }
 
-        // Veritabanı ile giriş kontrolü
+
         try (Connection connection = Database.openDataBase()) {
             assert connection != null;
             try (PreparedStatement preparedStatement = createPreparedStatement(connection, email, password);
@@ -53,7 +53,7 @@ public class Controller {
         }
     }
 
-    // PreparedStatement oluşturan yardımcı metot
+
     private PreparedStatement createPreparedStatement(Connection connection, String email, String password) throws SQLException {
         String sql = "SELECT * FROM logindata WHERE Emails = ? AND Password = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -62,7 +62,7 @@ public class Controller {
         return preparedStatement;
     }
 
-    // Genel bir alert gösterici
+
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
