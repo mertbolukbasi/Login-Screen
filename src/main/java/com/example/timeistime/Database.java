@@ -7,25 +7,25 @@ import java.sql.SQLException;
 public class Database {
 
 
-    public static final String DATABASE_NAME = "sys";
+    public static final String DATABASE_NAME = "logindatas";
     public static final String DATABASE_USER = "root";
     public static final String DATABASE_PASSWORD = "zeref";
     public static final String CONNECTION_STRING = "jdbc:mysql://localhost:3306/" + DATABASE_NAME;
-    private Connection connection;
+    private static Connection connection;
 
-    public boolean openDataBase () {
+    public static Connection openDataBase () {
 
         try {
             connection = DriverManager.getConnection(CONNECTION_STRING, DATABASE_USER, DATABASE_PASSWORD);
             System.out.println("BAGLANDIK LAAAN");
-            return true;
+            return connection;
         } catch (SQLException e) {
             System.out.println("Connection Error: " + e.getMessage());
-            return false;
+            return null;
         }
     }
 
-    public void closeDataBase () {
+    public static void closeDataBase () {
 
         if(connection != null) {
             try {
