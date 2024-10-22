@@ -19,15 +19,18 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("loginScreen.fxml"));
         AnchorPane anchorPane = fxmlLoader.load();
 
-        // Scene oluştur
         Scene scene = new Scene(anchorPane, 1280, 720);
         scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("loginScreenStyle.css")).toExternalForm());
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-
-        // Başlık ve sahneyi göster
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+
+        Database database = new Database();
+        database.openDataBase();
+
+
+        database.closeDataBase();
     }
 
 

@@ -17,3 +17,16 @@
     -fx-background-color:linear-gradient(to right bottom, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
 }
 
+.registerButton {
+
+    -fx-font-size: 25px;
+    -fx-background-color: linear-gradient(to right, #6190e8, #a7bfe8);
+}
+
+.registerButton:hover {
+    -fx-text-fill: white;
+}
+
+.login {
+    -fx-background-color:linear-gradient(to right bottom, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+}
