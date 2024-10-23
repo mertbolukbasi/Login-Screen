@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane styleClass="root" stylesheets="@loginScreenStyle.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeistime.RegisterController">
+
+    <VBox alignment="CENTER" maxHeight="504.0" prefWidth="642.0" spacing="20.0" styleClass="form-container">
+        <Label styleClass="title" text="Time is Time" />
+        <Label styleClass="subtitle" text="Welcome to register screen!" />
+        <TextField fx:id="emailField" promptText="Email" styleClass="input-field" />
+      <TextField fx:id="usernameField" promptText="Username" styleClass="input-field" />
+        <PasswordField fx:id="passwordField" promptText="Password" styleClass="input-field" />
+      <TextField fx:id="confirmPassword" promptText="Confirm Password" styleClass="input-field" />
+      <DatePicker fx:id="birthdayField" promptText="Birthday" styleClass="date-picker1" />
+        <JFXButton fx:id="registerButton" onAction="#getUserRegister" styleClass="login-button" text="Register" />
+      <Label onMouseClicked="#goLoginScreen" styleClass="footer-link" text="Do you have an account? Sign in!" />
+    </VBox>
+
+</StackPane>

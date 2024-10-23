@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane styleClass="root" stylesheets="@loginScreenStyle.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeistime.Controller">
+<StackPane styleClass="root" stylesheets="@loginScreenStyle.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeistime.LoginController">
 
    <VBox alignment="CENTER" maxHeight="504.0" prefWidth="642.0" spacing="20" styleClass="form-container">
       <Label styleClass="title" text="Time is Time" />
@@ -17,7 +17,7 @@
       <JFXButton fx:id="loginButton" onAction="#getUserLogin" styleClass="login-button" text="Login" />
 
       <Label styleClass="footer-link" text="Forgot Password?" />
-      <Label styleClass="footer-link" text="Don't have an account? Sign up" />
+      <Label onMouseClicked="#goRegisterScreen" styleClass="footer-link" text="Don't have an account? Sign up" />
    </VBox>
 
 </StackPane>

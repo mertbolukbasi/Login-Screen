@@ -10,10 +10,10 @@
     -fx-padding: 40px;
     -fx-spacing: 20px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 5);
-    -fx-min-width: 600px;
-    -fx-max-width: 600px;
-    -fx-min-height: 500px;
-    -fx-max-height: 500px;
+    -fx-min-width: 800px;
+    -fx-max-width: 800px;
+    -fx-min-height: 600px;
+    -fx-max-height: 600px;
     -fx-alignment: center;
 
 }
@@ -62,4 +62,11 @@
     -fx-text-fill: #7e57c2;
     -fx-underline: true;
     -fx-cursor: hand;
+}
+
+.date-picker1 {
+    -fx-background-color: #ede7f6;
+    -fx-pref-width: 100%;
+    -fx-min-width: 360px;
+    -fx-alignment: left;
 }
