@@ -4,6 +4,7 @@ module com.example.timeistime {
     requires com.jfoenix;
     requires javafx.controls;
     requires java.sql;
+    requires jjwt.api;
 
 
     opens com.example.timeistime to javafx.fxml;
