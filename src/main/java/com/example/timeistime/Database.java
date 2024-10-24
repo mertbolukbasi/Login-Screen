@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Database {
 
 
-    public static final String DATABASE_NAME = "logindatas";
+    public static final String DATABASE_NAME = "studyapp";
     public static final String DATABASE_USER = "root";
     public static final String DATABASE_PASSWORD = "zeref";
     public static final String CONNECTION_STRING = "jdbc:mysql://localhost:3306/" + DATABASE_NAME;

@@ -1,26 +1,49 @@
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.Claims;
+package com.example.timeistime;
 
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+
+import javax.crypto.SecretKey;
+import java.security.Key;
+import java.util.Arrays;
 import java.util.Date;
 
 public class CreateJWT {
 
-    private static final String SECRET_KEY = "yourSecretKey";
+    private static final Key key = Keys.secretKeyFor(io.jsonwebtoken.SignatureAlgorithm.HS256);
 
     public static String generateToken(String email) {
-        return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // Token geçerlilik süresi 10 saat
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+        JwtBuilder builder = Jwts.builder();
+        return builder
+                .subject(email)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .signWith(key)
                 .compact();
     }
 
     public static Claims validateToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .
+
+        System.out.println(token);
+        return   Jwts.parser()
+                .verifyWith((SecretKey) key)
+                .build()
+                .parseSignedClaims(token)
                 .getBody();
     }
+
+    public static void checkLocalToken(String token) {
+        if (token != null) {
+            // Token geçerliliğini kontrol et
+            Claims claims = CreateJWT.validateToken(token);
+            if (claims != null) {
+                System.out.println("Token valid, user: " + claims.getSubject());
+            } else {
+                System.out.println("Invalid token.");
+            }
+        } else {
+            System.out.println("No token available.");
+        }
+    }
+
 }

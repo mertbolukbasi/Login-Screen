@@ -17,6 +17,8 @@ import java.sql.*;
 
 public class LoginController {
 
+    private String token;
+
     @FXML
     private TextField emailField;
 
@@ -44,6 +46,9 @@ public class LoginController {
                  ResultSet resultSet = preparedStatement.executeQuery()) {
 
                 if (resultSet != null && resultSet.next()) {
+
+                    token = CreateJWT.generateToken(email);
+                    CreateJWT.checkLocalToken(token);
                     showAlert("Login Succesfull", "Welcome", Alert.AlertType.INFORMATION);
                     System.out.println("Login Succesfull");
                 } else {
@@ -59,8 +64,8 @@ public class LoginController {
     }
 
 
-    private PreparedStatement createPreparedStatement(Connection connection, String email, String password) throws SQLException {
-        String sql = "SELECT * FROM logindata WHERE Emails = ? AND Password = ?";
+    public static PreparedStatement createPreparedStatement(Connection connection, String email, String password) throws SQLException {
+        String sql = "SELECT * FROM users WHERE email = ? AND password_hash = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, email);
         preparedStatement.setString(2, password);
@@ -68,7 +73,7 @@ public class LoginController {
     }
 
 
-    private void showAlert(String title, String message, Alert.AlertType alertType) {
+    public static void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
