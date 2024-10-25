@@ -1,10 +1,9 @@
 module com.example.timeistime {
-    requires javafx.fxml;
     requires org.kordamp.bootstrapfx.core;
     requires com.jfoenix;
-    requires javafx.controls;
     requires java.sql;
     requires jjwt.api;
+    requires MaterialFX;
 
 
     opens com.example.timeistime to javafx.fxml;

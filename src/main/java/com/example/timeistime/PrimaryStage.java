@@ -20,7 +20,7 @@ public class PrimaryStage {
         Scene scene = new Scene(stackPane, 1280, 720);
         stage1.setScene(scene);
         stage1.setTitle("Time is Time");
-        stage1.setResizable(true);
+        stage1.setResizable(false);
         stage1.show();
     }
 

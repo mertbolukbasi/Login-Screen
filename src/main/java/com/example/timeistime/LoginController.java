@@ -1,6 +1,7 @@
 package com.example.timeistime;
 
 import com.jfoenix.controls.JFXButton;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,15 @@ public class LoginController {
 
     @FXML
     private PasswordField passwordField;
+
+    @FXML
+    private MFXButton mainButton;
+
+    @FXML
+    void goMainScreen(MouseEvent event) {
+
+        MainScreen.getMainScreen();
+    }
 
     @FXML
     void getUserLogin(ActionEvent event) {

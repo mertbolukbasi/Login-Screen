@@ -12,6 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         PrimaryStage.setStage1(stage);
+        MainScreen.setStage1(stage);
         PrimaryStage.loginScreen();
 
     }
