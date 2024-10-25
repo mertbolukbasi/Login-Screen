@@ -1,6 +1,7 @@
 package com.example.timeistime;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.layout.AnchorPane;
@@ -17,13 +18,13 @@ public class MainScreen {
 
       try {
           FXMLLoader fxmlLoader = new FXMLLoader(MainScreen.class.getResource("mainScreen.fxml"));
-          AnchorPane anchorPane = fxmlLoader.load();
+          Parent root = fxmlLoader.load();
 
-          Scene scene = new Scene(anchorPane);
+          Scene scene = new Scene(root,1280,720);
           stage1.setScene(scene);
           stage1.setTitle("Main Screen");
           stage1.setResizable(true);
-          stage1.setFullScreen(true);
+          stage1.setMaximized(true);
           stage1.show();
 
       }
