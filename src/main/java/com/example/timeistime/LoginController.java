@@ -31,7 +31,7 @@ public class LoginController {
     @FXML
     void getUserLogin(ActionEvent event) {
         String email = emailField.getText();
-        String password = passwordField.getText();
+        String password = PasswordUtils.hashPassword(passwordField.getText());
 
 
         if (email.isEmpty() || password.isEmpty()) {

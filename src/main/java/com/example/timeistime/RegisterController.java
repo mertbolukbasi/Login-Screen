@@ -8,13 +8,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class RegisterController {
 
@@ -42,6 +38,8 @@ public class RegisterController {
         String email = emailField.getText();
         String password = passwordField.getText();
         String username = usernameField.getText();
+        Date birthday = Date.valueOf(birthdayField.getValue());
+
 
         if (email.isEmpty() || password.isEmpty() || username.isEmpty()) {
             LoginController.showAlert("Empty Areas!", "Enter the username, e-mail, and password!", Alert.AlertType.WARNING);
@@ -67,11 +65,12 @@ public class RegisterController {
             }
 
             // Eğer kullanıcı yoksa, yeni bir kayıt ekle
-            String insertUserQuery = "INSERT INTO users (email, password_hash, username) VALUES (?, ?, ?)";
+            String insertUserQuery = "INSERT INTO users (email, password_hash, username, birthday) VALUES (?, ?, ?, ?)";
             try (PreparedStatement insertUserStatement = connection.prepareStatement(insertUserQuery)) {
                 insertUserStatement.setString(1, email);
-                insertUserStatement.setString(2, PasswordUtils.hashPassword(password));  // İstersen burada şifreyi hash'leyebilirsin (şifrelenmiş saklama)
+                insertUserStatement.setString(2, PasswordUtils.hashPassword(password));
                 insertUserStatement.setString(3, username);
+                insertUserStatement.setDate(4, birthday);
 
                 int rowsInserted = insertUserStatement.executeUpdate();
                 if (rowsInserted > 0) {
