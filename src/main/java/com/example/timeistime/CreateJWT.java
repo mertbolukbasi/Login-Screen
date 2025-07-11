@@ -34,7 +34,6 @@ public class CreateJWT {
 
     public static void checkLocalToken(String token) {
         if (token != null) {
-            // Token geçerliliğini kontrol et
             Claims claims = CreateJWT.validateToken(token);
             if (claims != null) {
                 System.out.println("Token valid, user: " + claims.getSubject());
