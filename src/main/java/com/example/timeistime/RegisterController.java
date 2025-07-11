@@ -49,7 +49,6 @@ public class RegisterController {
         try (Connection connection = Database.openDataBase()) {
             assert connection != null;
 
-            // Kullanıcının e-posta ile kayıtlı olup olmadığını kontrol et
             String checkUserQuery = "SELECT * FROM users WHERE email = ?";
             try (PreparedStatement checkUserStatement = connection.prepareStatement(checkUserQuery)) {
                 checkUserStatement.setString(1, email);
@@ -64,7 +63,6 @@ public class RegisterController {
                 }
             }
 
-            // Eğer kullanıcı yoksa, yeni bir kayıt ekle
             String insertUserQuery = "INSERT INTO users (email, password_hash, username, birthday) VALUES (?, ?, ?, ?)";
             try (PreparedStatement insertUserStatement = connection.prepareStatement(insertUserQuery)) {
                 insertUserStatement.setString(1, email);
